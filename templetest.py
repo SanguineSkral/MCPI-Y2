@@ -1,10 +1,14 @@
 from mcpi.minecraft import Minecraft
 from mcpi import block
 from time import sleep
+from random import randint
+
+water = 8
+air = 0
 
 def init(): 
 	# change 192.168.1.13 to 127.0.0.1 or your ip
-	mc = Minecraft.create("127.0.0.1", 4711)
+	mc = Minecraft.create("10.183.13.13", 4711)
 	x, y, z = mc.player.getPos()  
 	return mc
 
@@ -53,7 +57,26 @@ def main():
 	mc.setBlocks(x+1, y+7, z+1, x, y+7, z+1,114,2)
 	mc.setBlocks(x-1, y+7, z+1, x-1, y+7, z,114,1)
 	mc.setBlocks(x-1, y+7, z-1, x, y+7, z-1,114,3)
-
-	
-
 main()
+
+def make_poles(mc,x,y,z,k):
+       m = 41
+       for n in range(0,k):
+               if n > (k -2):
+                       m = 246
+               mc.setBlock(x, y+k,z,m)
+
+def secendary():
+        mc = init()
+        x, y, z = mc.player.getPos()  
+        count = 0
+        while True:
+			x, y, z = mc.player.getPos()
+			block_beneath = mc.getBlock(x, y, z)
+		
+			if block_beneath == 8:
+				mc.setBlock(x, y, z, 0)
+			if block_beneath == 9:
+				mc.setBlock(x, y, z, 0)
+			sleep(0.1)
+secendary()
